@@ -1,0 +1,22 @@
+.dark-theme {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(29, 78, 216, 0.95));
+}
+
+.light-theme {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(219, 234, 254, 0.95));
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-10%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+} 

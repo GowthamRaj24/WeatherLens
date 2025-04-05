@@ -1,0 +1,761 @@
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.city-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.city-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.city-item.active {
+  transform: scale(1.2);
+  font-weight: bold;
+}
+
+.city-name {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.city-state {
+  font-size: 14px;
+  color: #666;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+  padding: 0;
+}
+
+.nav-button svg {
+  width: 24px;
+  height: 24px;
+  fill: #666;
+  transition: fill 0.3s ease;
+}
+
+.nav-button svg:hover {
+  fill: #333;
+}
+
+.cloud-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@keyframes cloudAnimation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.cloud {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cloud1 {
+  width: 120px;
+  height: 60px;
+  top: 20px;
+  left: 0;
+  animation: cloudAnimation 60s linear infinite;
+}
+
+.cloud2 {
+  width: 150px;
+  height: 75px;
+  top: 80px;
+  right: 0;
+  animation: cloudAnimation 80s linear infinite;
+}
+
+.cloud3 {
+  width: 100px;
+  height: 50px;
+  top: 150px;
+  left: 20%;
+  animation: cloudAnimation 70s linear infinite;
+}
+
+@keyframes sunAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.sun {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #ffcf40;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: sunAnimation 5s ease-in-out infinite;
+}
+
+.city-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.city-item {
+  margin: 0 20px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+  opacity: 0.6;
+  transform: scale(1);
+}
+
+.city-item.active {
+  transform: scale(1.2); /* Enlarge the active city */
+  opacity: 1; /* Make active city more visible */
+}
+
+.city-item:hover {
+  transform: scale(1.2); /* Enlarge the active city */
+  opacity: 1;
+}
+
+.city-name {
+  font-size: 20px;
+  text-align: center;
+}
+
+/* Base container styles */
+.carousel-main-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.carousel-main-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Header styling */
+.carousel-header {
+  position: relative;
+  z-index: 10;
+}
+
+/* City carousel layout */
+.city-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  z-index: 10;
+}
+
+.cities-overflow-container {
+  overflow-x: auto;
+  width: 100%;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.cities-overflow-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.city-container {
+  display: flex;
+  gap: 30px;
+  padding: 0 10px;
+}
+
+/* Individual city item styling */
+.city-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 5px 10px;
+  cursor: pointer;
+  min-width: 80px;
+  scroll-snap-align: center;
+}
+
+.city-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.city-icon-container {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  backface-visibility: hidden;
+}
+
+.city-icon {
+  width: 22px;
+  height: 22px;
+  transition: all 0.3s ease;
+}
+
+.city-name {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Active city indicator with animation */
+.city-indicator {
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  animation: pulseWidth 2s infinite ease-in-out;
+}
+
+@keyframes pulseWidth {
+  0%, 100% { 
+    width: 40px;
+    opacity: 1;
+  }
+  50% { 
+    width: 35px;
+    opacity: 0.8;
+  }
+}
+
+/* City hover effects */
+.city-item:hover:not(.active) .city-icon-container {
+  transform: translateY(-8px) scale(1.05);
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.city-item:hover:not(.active) .city-name {
+  transform: translateY(-3px);
+}
+
+.city-item.active .city-icon-container {
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.city-item.active .city-name {
+  font-weight: 600;
+  transform: translateY(2px);
+}
+
+/* Navigation buttons */
+.city-nav-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.city-nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.city-nav-button:active {
+  transform: scale(0.95);
+}
+
+.city-nav-button.reveal-left {
+  animation: revealFromLeft 0.4s forwards;
+}
+
+.city-nav-button.reveal-right {
+  animation: revealFromRight 0.4s forwards;
+}
+
+@keyframes revealFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Decorative elements */
+.carousel-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.cloud-decoration {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  animation: cloudFloat linear infinite;
+  filter: blur(2px);
+}
+
+.cloud-decoration:before,
+.cloud-decoration:after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+.cloud-decoration:before {
+  width: 50px;
+  height: 50px;
+  top: -20px;
+  left: 25px;
+}
+
+.cloud-decoration:after {
+  width: 40px;
+  height: 40px;
+  top: -15px;
+  right: 25px;
+}
+
+.star-decoration {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: starTwinkle 3s ease-in-out infinite;
+}
+
+/* Small floating clouds using Lucide icons */
+.small-cloud-float {
+  position: absolute;
+  animation: floatUpDown ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.star-decoration {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: starTwinkle 3s ease-in-out infinite;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Shooting star animation */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: shootingStar ease-in infinite;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
+}
+
+.shooting-star:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0%, transparent 100%);
+  transform: rotate(-45deg);
+  transform-origin: left top;
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(10px, 10px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(120px, 120px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Glass reflection effect */
+.glass-reflection {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.05) 47%, 
+    rgba(255,255,255,0.1) 50%, 
+    rgba(255,255,255,0.05) 53%, 
+    rgba(255,255,255,0) 100%);
+  transform: rotate(-25deg);
+  animation: glassReflection 12s infinite ease-in-out;
+  opacity: 0.2;
+}
+
+@keyframes glassReflection {
+  0%, 100% {
+    transform: translateX(-100%) rotate(-25deg);
+  }
+  50% {
+    transform: translateX(100%) rotate(-25deg);
+  }
+}
+
+/* Infinite spinning animation (very slow) */
+.animate-spin-very-slow {
+  animation: spin 20s linear infinite;
+}
+
+/* Pulse animation */
+.animate-pulse-slow {
+  animation: pulseSlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+}
+
+/* Other animations */
+@keyframes cloudFloat {
+  0% {
+    transform: translateX(-150px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 150px));
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .city-container {
+    gap: 20px;
+  }
+  
+  .city-icon-container {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .city-name {
+    font-size: 14px;
+  }
+  
+  .carousel-main-container {
+    padding: 16px 10px;
+  }
+}
+
+/* Enhanced glass morphism effect */
+.glass-morphism {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced base container styles */
+.carousel-main-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.carousel-main-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Navigation buttons - more transparent */
+.city-nav-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.city-nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Update cloud decoration to be more transparent */
+.cloud-decoration {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  animation: cloudFloat linear infinite;
+  filter: blur(2px);
+}
+
+.cloud-decoration:before,
+.cloud-decoration:after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+/* Glass reflection effect - more subtle */
+.glass-reflection {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.05) 47%, 
+    rgba(255,255,255,0.1) 50%, 
+    rgba(255,255,255,0.05) 53%, 
+    rgba(255,255,255,0) 100%);
+  transform: rotate(-25deg);
+  animation: glassReflection 12s infinite ease-in-out;
+  opacity: 0.2;
+}
+
+/* Only add these new styles - the rest of the CSS file should remain unchanged */
+
+/* Add these styles to make the carousel more compact */
+
+.compact-carousel {
+  min-height: 120px; /* Reduced height */
+}
+
+.compact-carousel .city-carousel-wrapper {
+  padding: 8px 0;
+}
+
+.compact-carousel .cities-overflow-container {
+  padding: 5px 0;
+}
+
+.compact-carousel .city-content {
+  gap: 5px;
+}
+
+.compact-carousel .city-icon-container {
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.compact-carousel .city-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.compact-carousel .city-name {
+  font-size: 12px;
+  margin-top: 2px;
+  text-shadow: none;
+}
+
+.compact-carousel .city-indicator {
+  width: 30px;
+  height: 3px;
+  margin-top: 6px;
+}
+
+.compact-carousel .city-nav-button {
+  width: 28px;
+  height: 28px;
+}
+
+/* Update the city hover effects for compact version */
+.compact-carousel .city-item:hover:not(.active) .city-icon-container {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.compact-carousel .city-item:hover:not(.active) .city-name {
+  transform: translateY(-1px);
+}
+
+.compact-carousel .city-item.active .city-icon-container {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.compact-carousel .city-item.active .city-name {
+  transform: translateY(1px);
+}
+
+/* Animation adjustments for compact version */
+@keyframes pulseWidth {
+  0%, 100% { 
+    width: 30px;
+    opacity: 1;
+  }
+  50% { 
+    width: 25px;
+    opacity: 0.8;
+  }
+}
+
+/* Adjust the decorations to fit in compact space */
+.compact-carousel .carousel-decoration .shooting-star:after {
+  width: 40px;
+}
+
+/* Enhanced mobile view */
+@media (max-width: 640px) {
+  .compact-carousel {
+    padding: 12px 8px;
+  }
+  
+  .compact-carousel .city-container {
+    gap: 15px;
+  }
+  
+  .compact-carousel .city-icon-container {
+    width: 32px;
+    height: 32px;
+  }
+}
